@@ -1,5 +1,5 @@
 ================= Download dataset =================<br>
-https://www.kaggle.com/datasets/ashimstha/lettuce-health-compiled-dataset
+https://www.kaggle.com/datasets/ashimstha/lettuce-health-compiled-dataset<br>
 https://www.kaggle.com/datasets/ashishjstar/lettuce-diseases
 
 ================= Download model pre-train ================= 
