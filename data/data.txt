@@ -1,0 +1,2 @@
+# data for lettuce health: https://www.kaggle.com/datasets/ashimstha/lettuce-health-compiled-dataset
+# data for lettuce disease: https://www.kaggle.com/datasets/ashishjstar/lettuce-diseases
