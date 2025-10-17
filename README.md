@@ -2,5 +2,5 @@
 https://drive.google.com/file/d/1CJOl2rkEnIxdHb7PEj9mbt0MEBYgqCFS/view?usp=drive_link
 https://drive.google.com/file/d/1HEkbYESUVbEnYBjqwL4UL0oGd49na4_7/view?usp=drive_link
 
-================= Install library ================= 
+================= Install library =================\n
 pip install -r requirements.txt
