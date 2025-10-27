@@ -69,10 +69,19 @@ python src/lettuce_health/lettuce_health_test.py
 
 ### **Biểu đồ Accuracy & Loss**  
 <img src="outputs/figures/accuracy_loss.png" width="700">
+</div>
+
+---
+
+### 📊 Kết quả test
+
+<div align="center">
+
+### **Accuracy & Classification Report**  
+<img src="outputs/figures/test_accuracy.png" width="400">
 
 ### **Confusion Matrix**  
 <img src="outputs/figures/confusion_matrix.png" width="400">
-
 </div>
 
 ---
