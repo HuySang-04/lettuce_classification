@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Dự đoán bệnh trên xà lách 🌿</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📸 Dự đoán bệnh trên lá xà lách bằng mô hình Keras</h1>
+
+    <div class="upload-box">
+      <input type="file" id="fileInput" accept="image/*">
+      <button onclick="uploadImage()">Dự đoán</button>
+    </div>
+
+    <div id="preview" class="preview"></div>
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function uploadImage() {
+      const fileInput = document.getElementById('fileInput');
+      const file = fileInput.files[0];
+      if (!file) {
+        alert('Vui lòng chọn ảnh!');
+        return;
+      }
+
+      const preview = document.getElementById('preview');
+      preview.innerHTML = `<img src="${URL.createObjectURL(file)}" class="uploaded-img">`;
+
+      const resultBox = document.getElementById('result');
+      resultBox.innerHTML = '<p class="loading">⏳ Đang phân tích ảnh...</p>';
+
+      const formData = new FormData();
+      formData.append('file', file);
+
+      fetch('/predict', { method: 'POST', body: formData })
+        .then(res => res.json())
+        .then(data => {
+          let html = "";
+          if (data.class === 'healthy') {
+            html = `<div class="healthy-box">
+                      <h2>🌿 Lá xà lách khỏe mạnh!</h2>
+                      <p>Không phát hiện dấu hiệu bệnh.</p>
+                    </div>`;
+          } else {
+            html = "<h2>🧬 Kết quả dự đoán bệnh:</h2>";
+            data.detail.forEach(d => {
+              html += `
+                <div class="disease-block">
+                  <h3>${d.name_vi} (${d.name}) <span>(${d.confidence}%)</span></h3>
+                  <div class="suggestions">
+                    ${d.suggestions.map(img => `<img src="${img}" class="suggestion-img">`).join('')}
+                  </div>
+                </div>
+              `;
+            });
+          }
+          resultBox.innerHTML = html;
+        })
+        .catch(err => {
+          resultBox.innerHTML = '<p class="error">❌ Lỗi khi dự đoán!</p>';
+          console.error(err);
+        });
+    }
+  </script>
+</body>
+</html>

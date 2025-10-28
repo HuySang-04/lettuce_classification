@@ -1,0 +1,167 @@
+/* === GLOBAL === */
+body {
+  font-family: "Inter", "Segoe UI", Tahoma, sans-serif;
+  background: linear-gradient(135deg, #e0f2f1, #f5f7fa);
+  margin: 0;
+  padding: 0;
+  color: #2d3748;
+}
+
+.container {
+  max-width: 700px;
+  margin: 60px auto;
+  background: #ffffff;
+  padding: 30px 35px;
+  border-radius: 20px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: 0.3s;
+}
+
+.container:hover {
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+}
+
+/* === HEADERS === */
+h1 {
+  font-size: 24px;
+  color: #1a4d2e;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.subtitle {
+  color: #6b7280;
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+/* === UPLOAD === */
+.upload-box {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+
+input[type="file"] {
+  padding: 6px;
+}
+
+button {
+  background: linear-gradient(90deg, #2f9e44, #52b788);
+  color: #fff;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(47, 158, 68, 0.25);
+  transition: 0.25s ease-in-out;
+}
+
+button:hover {
+  background: linear-gradient(90deg, #238636, #40916c);
+  transform: translateY(-2px);
+}
+
+/* === IMAGE === */
+.uploaded-img {
+  width: 250px;
+  border-radius: 12px;
+  margin: 15px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* === RESULT === */
+.result {
+  margin-top: 25px;
+  text-align: left;
+}
+
+.result h2 {
+  font-size: 18px;
+  color: #1a4d2e;
+  border-bottom: 2px solid #a7f3d0;
+  padding-bottom: 8px;
+  margin-bottom: 15px;
+}
+
+/* === DISEASE BLOCK === */
+.disease-block {
+  background: #f9fbfd;
+  border: 1px solid #e1e5eb;
+  border-radius: 12px;
+  padding: 15px 18px;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+.disease-block:hover {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.disease-block h3 {
+  margin: 0 0 10px;
+  color: #2d3748;
+  font-size: 17px;
+}
+
+.disease-block h3 span {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* === SUGGESTIONS === */
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.suggestion-img {
+  width: 47%;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* === HEALTHY BOX === */
+.healthy-box {
+  background: #e6f9ed;
+  border-left: 5px solid #2f9e44;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+  color: #155724;
+  box-shadow: 0 3px 8px rgba(47, 158, 68, 0.1);
+}
+
+/* === LOADING & ERROR === */
+.loading {
+  color: #555;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.error {
+  color: #e63946;
+  font-weight: 600;
+  font-size: 15px;
+  background: #ffe5e5;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border-left: 4px solid #e63946;
+  display: inline-block;
+  margin-top: 12px;
+}
