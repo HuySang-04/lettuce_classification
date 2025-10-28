@@ -86,6 +86,14 @@ python src/lettuce_health/lettuce_health_test.py
 
 ---
 
+## 🖼️ Demo Screenshots
+
+![healthhy](./outputs/demo_web/demo1.png)
+
+![unhealthhy](./outputs/demo_web/demo2.png)
+
+---
+
 ## ⚙️ Môi trường đề xuất  
 
 - Python 3.10+

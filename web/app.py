@@ -13,7 +13,6 @@ CLASS_NAMES = ['healthy', 'unhealthy']
 def home():
     return render_template('index.html')
 
-
 @app.route('/predict', methods=['POST'])
 def predict():
     if 'file' not in request.files:
