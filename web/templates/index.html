@@ -2,12 +2,210 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Dự đoán bệnh trên xà lách 🌿</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dự đoán tình trạng lá xà lách 🌿</title>
+  <style>
+    /* Reset và font chữ */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Hiệu ứng nền trang trí */
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 6px;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A, #CDDC39);
+    }
+
+    /* Tiêu đề */
+    h1 {
+      text-align: center;
+      color: #2E7D32;
+      margin-bottom: 30px;
+      font-size: 28px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h1::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #4CAF50, #8BC34A);
+      border-radius: 3px;
+    }
+
+    /* Khu vực upload */
+    .upload-box {
+      background-color: #f8f9fa;
+      border: 2px dashed #c3cfe2;
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
+    }
+
+    .upload-box:hover {
+      border-color: #8BC34A;
+      background-color: #f0f7f0;
+    }
+
+    .upload-box input[type="file"] {
+      display: block;
+      margin: 0 auto 20px;
+      padding: 10px;
+      background-color: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 400px;
+      cursor: pointer;
+    }
+
+    .upload-box button {
+      background: linear-gradient(135deg, #4CAF50, #66BB6A);
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    }
+
+    .upload-box button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+    }
+
+    .upload-box button:active {
+      transform: translateY(0);
+    }
+
+    /* Khu vực xem trước ảnh */
+    .preview {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .uploaded-img {
+      max-width: 100%;
+      max-height: 300px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border: 3px solid white;
+    }
+
+    /* Khu vực kết quả */
+    .result {
+      margin-top: 20px;
+    }
+
+    .healthy-box, .unhealthy-box {
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .healthy-box {
+      background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+      border-left: 5px solid #4CAF50;
+    }
+
+    .unhealthy-box {
+      background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+      border-left: 5px solid #F44336;
+    }
+
+    .healthy-box h2, .unhealthy-box h2 {
+      margin-bottom: 15px;
+      font-size: 22px;
+    }
+
+    .healthy-box h2 {
+      color: #2E7D32;
+    }
+
+    .unhealthy-box h2 {
+      color: #C62828;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      font-size: 18px;
+      color: #666;
+      background-color: #f5f5f5;
+      border-radius: 8px;
+    }
+
+    .error {
+      text-align: center;
+      padding: 20px;
+      background-color: #ffebee;
+      color: #c62828;
+      border-radius: 8px;
+      border-left: 5px solid #f44336;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .upload-box {
+        padding: 20px;
+      }
+
+      .upload-box button {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>📸 Dự đoán bệnh trên lá xà lách bằng mô hình Keras</h1>
+    <h1>📸 Dự đoán tình trạng lá xà lách bằng mô hình Keras</h1>
 
     <div class="upload-box">
       <input type="file" id="fileInput" accept="image/*">
@@ -27,12 +225,14 @@
         return;
       }
 
+      // Hiển thị ảnh xem trước
       const preview = document.getElementById('preview');
       preview.innerHTML = `<img src="${URL.createObjectURL(file)}" class="uploaded-img">`;
 
       const resultBox = document.getElementById('result');
       resultBox.innerHTML = '<p class="loading">⏳ Đang phân tích ảnh...</p>';
 
+      // Gửi file đến server Flask
       const formData = new FormData();
       formData.append('file', file);
 
@@ -41,23 +241,27 @@
         .then(data => {
           let html = "";
           if (data.class === 'healthy') {
-            html = `<div class="healthy-box">
-                      <h2>🌿 Lá xà lách khỏe mạnh!</h2>
-                      <p>Không phát hiện dấu hiệu bệnh.</p>
-                    </div>`;
+            html = `
+              <div class="healthy-box">
+                <h2>🌿 Lá xà lách KHỎE MẠNH!</h2>
+                <p>Không phát hiện dấu hiệu bệnh.</p>
+                <p><b>Độ tin cậy:</b> ${(data.confidence * 100).toFixed(2)}%</p>
+              </div>
+            `;
+          } else if (data.class === 'unhealthy') {
+            html = `
+              <div class="unhealthy-box">
+                <h2>⚠️ Lá xà lách KHÔNG KHỎE!</h2>
+                <p>Có dấu hiệu bất thường hoặc bệnh.</p>
+                <p><b>Độ tin cậy:</b> ${(data.confidence * 100).toFixed(2)}%</p>
+              </div>
+            `;
+          } else if (data.error) {
+            html = `<p class="error">❌ ${data.error}</p>`;
           } else {
-            html = "<h2>🧬 Kết quả dự đoán bệnh:</h2>";
-            data.detail.forEach(d => {
-              html += `
-                <div class="disease-block">
-                  <h3>${d.name_vi} (${d.name}) <span>(${d.confidence}%)</span></h3>
-                  <div class="suggestions">
-                    ${d.suggestions.map(img => `<img src="${img}" class="suggestion-img">`).join('')}
-                  </div>
-                </div>
-              `;
-            });
+            html = `<p class="error">❌ Không thể xác định kết quả.</p>`;
           }
+
           resultBox.innerHTML = html;
         })
         .catch(err => {
