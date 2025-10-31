@@ -14,6 +14,7 @@ lettuce_classification/
 ├── notebooks/               # Training & evaluation notebooks
 ├── outputs/                 # Saved models and results
 ├── src/                     # Main source code
+├── web
 ├── requirements.txt         # Required dependencies
 └── README.md
 ```
