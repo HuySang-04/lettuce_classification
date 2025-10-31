@@ -14,6 +14,7 @@ lettuce_classification/
 ├── notebooks/               # Notebook huấn luyện & đánh giá
 ├── outputs/                 # Lưu mô hình và kết quả
 ├── src/                     # Mã nguồn chính
+├── web
 ├── requirements.txt         # Thư viện cần cài đặt
 └── README.md
 ```
